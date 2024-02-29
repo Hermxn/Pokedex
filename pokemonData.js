@@ -60,7 +60,7 @@ const POKEMONARRAY = [
      type: ['fire'],
    },
    {
-     thumbnail: 'media/cloyster',
+     thumbnail: 'media/cloyster.jpg',
      id:'N°11',
      name: 'cloyster',
      type: ['ice', 'water'],
