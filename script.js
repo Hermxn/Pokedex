@@ -1,49 +1,75 @@
 import { POKEMONARRAY } from "./pokemonData.js";
 
 function main () {
+    const sectionCards = document.createElement("section");
+    document.body.appendChild(sectionCards);
+    styleSection(sectionCards);
     for (const pokemon of POKEMONARRAY) {
-        const card = createCard();
+        const card = createCard(sectionCards);
         styleCard(card);
         fillCard(card, pokemon);
     }
 }
 
-function createCard () {
+function createCard (sectionCards) {
     const container = document.createElement("div");
-    const name = document.createElement("p")
     const image = document.createElement("img");
-    document.body.appendChild(container);
-    container.appendChild(name);
+    const index = document.createElement("p");
+    const name = document.createElement("h3");
+    const type = document.createElement("p");
+    sectionCards.appendChild(container);
     container.appendChild(image);
+    container.appendChild(index);
+    container.appendChild(name);
+    container.appendChild(type);
     return {
         "container": container, 
+        "image": image,
+        "index": index,
         "name": name, 
-        "image": image, 
+        "type": type, 
     };
 }
 
 function styleCard(card) {
-    // Установить стили для контейнера
-    card.container.style.border = '1px black solid';
-    card.container.style.width = '300px'; // Фиксированная ширина контейнера
-    card.container.style.height = '400px'; // Фиксированная высота контейнера
-    card.container.style.position = 'relative';
+    card.container.style.border = "1px red solid";
+    card.container.style.width = "170px";
+    card.container.style.height = "230px";
+    card.container.style.display = "flex";
+    card.container.style.flexDirection = "column";
+    card.container.style.alignItems = "center";
+
+    card.image.style.height = "50%";
+    card.image.style.maxWidth = "90%";
 
 
-    // Установить стили для изображения
-    card.image.style.maxWidth = '100%'; // Максимальная ширина изображения равна 80% от ширины контейнера
-    card.image.style.maxHeight = '80%'; // Максимальная высота изображения равна 80% от высоты контейнера
-    card.image.style.objectFit = 'contain'; // Сохраняет пропорции изображения и вписывает его в контейнер
-    card.image.style.position = 'absolute'; // Позиционируем изображение абсолютно внутри контейнера
+    card.index.style.marginBottom = '0';
 
+    card.name.style.marginBottom = '0';
 
+    card.type.style.marginBottom = '0';
 }
 
 
 function fillCard (card, pokemon) {
-    card.name.innerHTML = pokemon.name;
     card.image.src = pokemon.thumbnail;
+    card.index.innerHTML = `Index: ${pokemon.id}`;
+    card.name.innerHTML = pokemon.name.toUpperCase();
+    switch (pokemon.type.length) {
+        case 1:
+            card.type.innerHTML = `Type: ${pokemon.type[0]}`;
+            break;
+        case 2:
+            card.type.innerHTML = `Type: ${pokemon.type[0]} ${pokemon.type[1]}`
+            break;
+    };
 }
 
+function styleSection (sectionCards) {
+    sectionCards.style.display = "flex";
+    sectionCards.style.flexWrap = "wrap";
+    sectionCards.style.justifyContent = "center";
+    sectionCards.style.gap = "1vw";
+}
 
-main()
+main();
