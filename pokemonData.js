@@ -458,7 +458,7 @@ const POKEMONARRAY = [
   {
     thumbnail: 'media/rapidash.gif',
     id:'078',
-    name: 'tentrapidashacool',
+    name: 'rapidash',
     type: ['fire'],
   },
   {

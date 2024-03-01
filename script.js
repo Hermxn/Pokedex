@@ -1,13 +1,12 @@
 import { POKEMONARRAY } from "./pokemonData.js";
 
 function main () {
-    const sectionCards = document.createElement("section");
-    document.body.appendChild(sectionCards);
-    styleSection(sectionCards);
+    const sectionCards = createSections();
+    styleSections(sectionCards);
     for (const pokemon of POKEMONARRAY) {
         const card = createCard(sectionCards);
-        styleCard(card);
         fillCard(card, pokemon);
+        styleCard(card);
     }
 }
 
@@ -31,26 +30,6 @@ function createCard (sectionCards) {
     };
 }
 
-function styleCard(card) {
-    card.container.style.border = "1px red solid";
-    card.container.style.width = "170px";
-    card.container.style.height = "230px";
-    card.container.style.display = "flex";
-    card.container.style.flexDirection = "column";
-    card.container.style.alignItems = "center";
-
-    card.image.style.height = "50%";
-    card.image.style.maxWidth = "90%";
-
-
-    card.index.style.marginBottom = '0';
-
-    card.name.style.marginBottom = '0';
-
-    card.type.style.marginBottom = '0';
-}
-
-
 function fillCard (card, pokemon) {
     card.image.src = pokemon.thumbnail;
     card.index.innerHTML = `Index: ${pokemon.id}`;
@@ -65,7 +44,32 @@ function fillCard (card, pokemon) {
     };
 }
 
-function styleSection (sectionCards) {
+function styleCard(card) {
+    card.container.style.border = "1px red solid";
+    card.container.style.width = "170px";
+    card.container.style.height = "230px";
+    card.container.style.display = "flex";
+    card.container.style.flexDirection = "column";
+    card.container.style.alignItems = "center";
+
+    card.image.style.height = "50%";
+    card.image.style.maxWidth = "90%";
+    card.image.style.marginTop = "5px"
+
+    card.index.style.marginBottom = '0';
+
+    card.name.style.marginBottom = '0';
+
+    card.type.style.marginBottom = '0';
+}
+
+
+function createSections () {
+    const sectionCards = document.createElement("section");
+    return document.body.appendChild(sectionCards);
+}
+
+function styleSections (sectionCards) {
     sectionCards.style.display = "flex";
     sectionCards.style.flexWrap = "wrap";
     sectionCards.style.justifyContent = "center";
