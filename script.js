@@ -13,7 +13,7 @@ function main () {
     for (const pokemon of POKEMONARRAY) {
         const card = createCard(sectionCards);
         fillCard(card, pokemon);
-        styleCard(card);
+        styleCard(card, pokemon);
         addCardEvents(card);
     }
 }
@@ -79,12 +79,16 @@ function fillCard (card, pokemon) {
             card.elementType.innerHTML = `Type: ${pokemon.type[0]} ${pokemon.type[1]}`
             break;
     };
-    card.elementDescription.innerHTML = "HOLAA";
+    card.elementDescription.innerHTML = pokemon.description;
 }
 
-function styleCard(card) {
+function styleCard(card, pokemon) {
 
-    const descriptionElements = [card.elementIndex, card.elementName, card.elementType];
+    // if (pokemon.type.includse("water")) {
+    //     console.log(pokemon.id, pokemon.type)
+    // }
+
+    const descriptionElements = [card.elementIndex, card.elementName, card.elementType, card.elementDescription];
     const containers = [card.containerFront, card.containerBack];
 
     descriptionElements.forEach(element => {
@@ -97,9 +101,12 @@ function styleCard(card) {
     });
 
     containers.forEach(container => {
-        container.style.backgroundImage = "url('./media/assets/card.png')";
         container.style.backgroundSize = "100% 100%"
     });
+
+    document.body.style.backgroundImage = "url('./media/assets/bg.jpg')";
+    document.body.style.backgroundSize = "25%";
+    document.body.style.backgroundRepeat = "repeat";
 
     card.containerCard.style.position = "relative";
 
@@ -112,6 +119,7 @@ function styleCard(card) {
     card.containerFront.style.display = "flex";
     card.containerFront.style.flexDirection = "column";
     card.containerFront.style.alignItems = "center";
+    card.containerFront.style.backgroundImage = "url('./media/assets/card.png')";
 
     card.containerBack.style.position = "absolute"; 
     card.containerBack.style.zIndex = "0";
@@ -121,8 +129,7 @@ function styleCard(card) {
     card.containerBack.style.top = "0";
     card.containerBack.style.width = "100%";
     card.containerBack.style.height = "100%";
-    card.containerBack.style.border = "1px gray solid";
-
+    card.containerBack.style.backgroundImage = "url('./media/assets/card_back.png')";
 
     card.wrapperImage.style.height = "55%";
     card.wrapperImage.style.width = "100%";
@@ -135,6 +142,10 @@ function styleCard(card) {
 
     card.elementImage.style.maxWidth = "100%";
     card.elementImage.style.maxHeight = "100%";
+
+    card.elementType.style.margin = "10px 0px 10px 0px";
+
+    card.elementDescription.style.margin = "0px 10px 10px 10px"
 
 }
 
