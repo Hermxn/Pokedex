@@ -5,7 +5,6 @@ const ROTATED_FALSE = "rotateY(0deg)";
 
 const ROTATE_SPEED = "transform 0.5s ease-in-out";
 
-
 function main () {
     addFont();
     const sectionCards = createSections().sectionCards;
@@ -84,9 +83,8 @@ function fillCard (card, pokemon) {
 
 function styleCard(card, pokemon) {
 
-    // if (pokemon.type.includse("water")) {
-    //     console.log(pokemon.id, pokemon.type)
-    // }
+    card.containerFront.style.backgroundImage = `url("./assets/static/card_cover_front/${pokemon.type[0]}.jpg")`;
+    card.containerBack.style.backgroundImage = `url("./assets/static/card_cover_back/${pokemon.type[0]}.jpg")`;
 
     const descriptionElements = [card.elementIndex, card.elementName, card.elementType, card.elementDescription];
     const containers = [card.containerFront, card.containerBack];
@@ -119,7 +117,6 @@ function styleCard(card, pokemon) {
     card.containerFront.style.display = "flex";
     card.containerFront.style.flexDirection = "column";
     card.containerFront.style.alignItems = "center";
-    card.containerFront.style.backgroundImage = "url('./media/assets/card.png')";
 
     card.containerBack.style.position = "absolute"; 
     card.containerBack.style.zIndex = "0";
@@ -129,7 +126,6 @@ function styleCard(card, pokemon) {
     card.containerBack.style.top = "0";
     card.containerBack.style.width = "100%";
     card.containerBack.style.height = "100%";
-    card.containerBack.style.backgroundImage = "url('./media/assets/card_back.png')";
 
     card.wrapperImage.style.height = "55%";
     card.wrapperImage.style.width = "100%";
