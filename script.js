@@ -24,7 +24,7 @@ function addFont () {
     `
     @font-face {
         font-family: 'Nintendo'; 
-        src: url('./media/assets/font.ttf') format('truetype'); 
+        src: url('./assets/nintendo_font.ttf') format('truetype'); 
     }
     `;
     document.head.appendChild(styleElement);
@@ -68,7 +68,7 @@ function createCard (sectionCards) {
 }
 
 function fillCard (card, pokemon) {
-    card.elementImage.src = pokemon.thumbnail;
+    card.elementImage.src = `assets/static/pokemon_image/${pokemon.thumbnail}`;
     card.elementIndex.innerHTML = `#${pokemon.id}`;
     card.elementName.innerHTML = pokemon.name.toUpperCase();
     switch (pokemon.type.length) {
@@ -104,7 +104,7 @@ function styleCard(card, pokemon) {
         container.style.backgroundSize = "100% 100%"
     });
 
-    document.body.style.backgroundImage = "url('./media/assets/bg.jpg')";
+    document.body.style.backgroundImage = "url('./assets/static/background.jpg')";
     document.body.style.backgroundSize = "25%";
     document.body.style.backgroundRepeat = "repeat";
 
