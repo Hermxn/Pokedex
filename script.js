@@ -43,13 +43,13 @@ function createCard (sectionCards) {
     sectionCards.appendChild(containerCard);
     containerCard.appendChild(containerFront);
     containerCard.appendChild(containerBack);
+    containerFront.appendChild(elementIndex);
     containerFront.appendChild(wrapperImage);
     containerFront.appendChild(wrapperContent);
-    containerBack.appendChild(elementType);
     containerBack.appendChild(elementDescription);
     wrapperImage.appendChild(elementImage);
-    wrapperContent.appendChild(elementIndex);
     wrapperContent.appendChild(elementName);
+    wrapperContent.appendChild(elementType);
     containerFront.className = "containerFront";
     containerBack.className = "containerBack";
     return {
@@ -90,16 +90,27 @@ function styleCard(card, pokemon) {
     const containers = [card.containerFront, card.containerBack];
 
     descriptionElements.forEach(element => {
-        element.style.marginTop = "5px";
+        element.style.marginTop = "10px";
         element.style.textAlign = "center";
         element.style.fontFamily = "Nintendo";
         element.style.fontStyle = "normal";
         element.style.fontWeight= 200;
         element.style.fontSize = "26px";
+        element.style.marginBottom = "15px"
     });
 
+    card.elementIndex.style.marginBottom = "0px";
+    card.elementIndex.style.width = "100%";
+    card.elementIndex.style.textAlign = "left";
+    card.elementIndex.style.marginLeft = "22px";
+    card.elementIndex.style.fontSize = "20px";
+
+    card.elementName.style.marginTop = "15px";
+
+
     containers.forEach(container => {
-        container.style.backgroundSize = "100% 100%"
+        container.style.backgroundSize = "100% 100%";
+        container.style.borderRadius = "10px";
     });
 
     document.body.style.backgroundImage = "url('./assets/static/background.jpg')";
@@ -127,7 +138,7 @@ function styleCard(card, pokemon) {
     card.containerBack.style.width = "100%";
     card.containerBack.style.height = "100%";
 
-    card.wrapperImage.style.height = "55%";
+    card.wrapperImage.style.height = "42%";
     card.wrapperImage.style.width = "100%";
     card.wrapperImage.style.display = "flex";
     card.wrapperImage.style.alignItems = "center"; 
@@ -141,7 +152,8 @@ function styleCard(card, pokemon) {
 
     card.elementType.style.margin = "10px 0px 10px 0px";
 
-    card.elementDescription.style.margin = "0px 10px 10px 10px"
+    card.elementDescription.style.margin = "12px 10px 10px 10px";
+    card.elementDescription.style.fontSize = "22px";
 
 }
 
