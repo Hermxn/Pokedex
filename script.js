@@ -119,7 +119,6 @@ function styleCard(card, pokemon) {
 
     document.body.style.backgroundImage = "url('./assets/static/background.jpg')";
     document.body.style.backgroundSize = "25%";
-    document.body.style.backgroundRepeat = "repeat";
 
     card.containerCard.style.position = "relative";
 
@@ -168,6 +167,9 @@ function styleCard(card, pokemon) {
     card.elementType1.style.maxHeight = "80%";
     card.elementType2.style.maxWidth = "80%";
     card.elementType2.style.maxHeight = "80%";
+
+    card.containerFront.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.8)";
+    card.containerBack.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.8)";
 }
 
 
