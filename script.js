@@ -2,7 +2,6 @@ import { POKEMONARRAY } from "./pokemonData.js";
 
 const ROTATED_TRUE = "rotateY(180deg)";
 const ROTATED_FALSE = "rotateY(0deg)";
-
 const ROTATE_SPEED = "transform 0.5s ease-in-out";
 
 function main () {
@@ -34,22 +33,25 @@ function createCard (sectionCards) {
     const containerFront = document.createElement("div");
     const containerBack = document.createElement("div");
     const wrapperImage = document.createElement("div");
-    const wrapperContent = document.createElement("div");
+    const wrapperImageType = document.createElement("div");
     const elementImage = document.createElement("img");
     const elementIndex = document.createElement("p");
     const elementName = document.createElement("h3");
-    const elementType = document.createElement("p");
+    const elementType1 = document.createElement("img");
+    const elementType2 = document.createElement("img");
     const elementDescription = document.createElement("p");
     sectionCards.appendChild(containerCard);
     containerCard.appendChild(containerFront);
     containerCard.appendChild(containerBack);
     containerFront.appendChild(elementIndex);
     containerFront.appendChild(wrapperImage);
-    containerFront.appendChild(wrapperContent);
+    containerFront.appendChild(elementName);
+    containerFront.appendChild(wrapperImageType);
+    wrapperImageType.appendChild(elementType1);
+    wrapperImageType.appendChild(elementType2);
     containerBack.appendChild(elementDescription);
     wrapperImage.appendChild(elementImage);
-    wrapperContent.appendChild(elementName);
-    wrapperContent.appendChild(elementType);
+    containerCard.className = "containerCard";
     containerFront.className = "containerFront";
     containerBack.className = "containerBack";
     return {
@@ -57,12 +59,13 @@ function createCard (sectionCards) {
         "containerFront": containerFront, 
         "containerBack": containerBack,
         "wrapperImage": wrapperImage,
-        "wrapperContent": wrapperContent,
+        "wrapperImageType": wrapperImageType,
         "elementDescription": elementDescription,
         "elementImage": elementImage,
         "elementIndex": elementIndex,
         "elementName": elementName, 
-        "elementType": elementType, 
+        "elementType1": elementType1, 
+        "elementType2": elementType2, 
     };
 }
 
@@ -72,10 +75,11 @@ function fillCard (card, pokemon) {
     card.elementName.innerHTML = pokemon.name.toUpperCase();
     switch (pokemon.type.length) {
         case 1:
-            card.elementType.innerHTML = `Type: ${pokemon.type[0]}`;
+            card.elementType1.src = `./assets/static/logo_types/${pokemon.type[0]}.png`;
             break;
         case 2:
-            card.elementType.innerHTML = `Type: ${pokemon.type[0]} ${pokemon.type[1]}`
+            card.elementType1.src = `./assets/static/logo_types/${pokemon.type[0]}.png`;
+            card.elementType2.src = `./assets/static/logo_types/${pokemon.type[1]}.png`;
             break;
     };
     card.elementDescription.innerHTML = pokemon.description;
@@ -86,7 +90,7 @@ function styleCard(card, pokemon) {
     card.containerFront.style.backgroundImage = `url("./assets/static/card_cover_front/${pokemon.type[0]}.jpg")`;
     card.containerBack.style.backgroundImage = `url("./assets/static/card_cover_back/${pokemon.type[0]}.jpg")`;
 
-    const descriptionElements = [card.elementIndex, card.elementName, card.elementType, card.elementDescription];
+    const descriptionElements = [card.elementIndex, card.elementName, card.elementDescription];
     const containers = [card.containerFront, card.containerBack];
 
     descriptionElements.forEach(element => {
@@ -94,9 +98,9 @@ function styleCard(card, pokemon) {
         element.style.textAlign = "center";
         element.style.fontFamily = "Nintendo";
         element.style.fontStyle = "normal";
-        element.style.fontWeight= 200;
+        element.style.fontWeight= "200";
         element.style.fontSize = "26px";
-        element.style.marginBottom = "15px"
+        element.style.marginBottom = "10px"
     });
 
     card.elementIndex.style.marginBottom = "0px";
@@ -144,17 +148,26 @@ function styleCard(card, pokemon) {
     card.wrapperImage.style.alignItems = "center"; 
     card.wrapperImage.style.justifyContent = "center";     
 
-    card.wrapperContent.style.height = "25%";
-    card.wrapperContent.style.width = "100%";
 
     card.elementImage.style.maxWidth = "100%";
     card.elementImage.style.maxHeight = "100%";
 
-    card.elementType.style.margin = "10px 0px 10px 0px";
+    card.wrapperImageType.style.margin = "10px 0px 10px 0px";
 
     card.elementDescription.style.margin = "12px 10px 10px 10px";
     card.elementDescription.style.fontSize = "22px";
 
+    card.elementName.style.width = "100%";
+    card.wrapperImageType.style.width = "100%";
+    card.wrapperImageType.style.margin = "0px 0px 0px 0px";
+    card.wrapperImageType.style.height = "14%";
+    card.wrapperImageType.style.display = "flex";
+    card.wrapperImageType.style.justifyContent = "center";
+
+    card.elementType1.style.maxWidth = "80%";
+    card.elementType1.style.maxHeight = "80%";
+    card.elementType2.style.maxWidth = "80%";
+    card.elementType2.style.maxHeight = "80%";
 }
 
 
