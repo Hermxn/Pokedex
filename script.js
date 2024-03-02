@@ -1,16 +1,33 @@
 import { POKEMONARRAY } from "./pokemonData.js";
 
+const ROTATED_TRUE = "rotateY(180deg)";
+const ROTATED_FALSE = "rotateY(0deg)";
+
+const ROTATE_SPEED = "transform 0.5s ease-in-out";
+
+
 function main () {
-    const sectionCards = createSections();
+    addFont();
+    const sectionCards = createSections().sectionCards;
     styleSections(sectionCards);
     for (const pokemon of POKEMONARRAY) {
         const card = createCard(sectionCards);
         fillCard(card, pokemon);
         styleCard(card);
-        card.containerCard.addEventListener("mouseover", shadowMouseOver);
-        card.containerCard.addEventListener("mouseout", shadowMouseOut);
-        card.containerCard.addEventListener("click", rotateCard);
+        addCardEvents(card);
     }
+}
+
+function addFont () {
+    const styleElement = document.createElement('style');
+    styleElement.innerHTML = 
+    `
+    @font-face {
+        font-family: 'Nintendo'; 
+        src: url('./media/assets/font.ttf') format('truetype'); 
+    }
+    `;
+    document.head.appendChild(styleElement);
 }
 
 function createCard (sectionCards) {
@@ -29,11 +46,11 @@ function createCard (sectionCards) {
     containerCard.appendChild(containerBack);
     containerFront.appendChild(wrapperImage);
     containerFront.appendChild(wrapperContent);
+    containerBack.appendChild(elementType);
     containerBack.appendChild(elementDescription);
     wrapperImage.appendChild(elementImage);
     wrapperContent.appendChild(elementIndex);
     wrapperContent.appendChild(elementName);
-    wrapperContent.appendChild(elementType);
     containerFront.className = "containerFront";
     containerBack.className = "containerBack";
     return {
@@ -47,7 +64,6 @@ function createCard (sectionCards) {
         "elementIndex": elementIndex,
         "elementName": elementName, 
         "elementType": elementType, 
-
     };
 }
 
@@ -67,58 +83,71 @@ function fillCard (card, pokemon) {
 }
 
 function styleCard(card) {
+
+    const descriptionElements = [card.elementIndex, card.elementName, card.elementType];
+    const containers = [card.containerFront, card.containerBack];
+
+    descriptionElements.forEach(element => {
+        element.style.marginTop = "5px";
+        element.style.textAlign = "center";
+        element.style.fontFamily = "Nintendo";
+        element.style.fontStyle = "normal";
+        element.style.fontWeight= 200;
+        element.style.fontSize = "26px";
+    });
+
+    containers.forEach(container => {
+        container.style.backgroundImage = "url('./media/assets/card.png')";
+        container.style.backgroundSize = "100% 100%"
+    });
+
     card.containerCard.style.position = "relative";
 
     card.containerFront.style.zIndex = "1";
     card.containerFront.style.backfaceVisibility = "hidden";
-    card.containerFront.style.transition = "transform 0.5s ease-in-out";
+    card.containerFront.style.transition = ROTATE_SPEED;
     card.containerFront.style.position = "relative";
-    card.containerFront.style.border = "1px gray solid";
     card.containerFront.style.width = "200px";
     card.containerFront.style.height = "300px";
     card.containerFront.style.display = "flex";
     card.containerFront.style.flexDirection = "column";
     card.containerFront.style.alignItems = "center";
-    card.containerFront.style.backgroundColor = "#d9e6f2";
 
-    card.wrapperImage.style.height = "65%";
+    card.containerBack.style.position = "absolute"; 
+    card.containerBack.style.zIndex = "0";
+    card.containerBack.style.backfaceVisibility = "hidden";
+    card.containerBack.style.transition = ROTATE_SPEED;
+    card.containerBack.style.transform = "rotateY(-180deg)"
+    card.containerBack.style.top = "0";
+    card.containerBack.style.width = "100%";
+    card.containerBack.style.height = "100%";
+    card.containerBack.style.border = "1px gray solid";
+
+
+    card.wrapperImage.style.height = "55%";
     card.wrapperImage.style.width = "100%";
     card.wrapperImage.style.display = "flex";
     card.wrapperImage.style.alignItems = "center"; 
-    card.wrapperImage.style.justifyContent = "center"; 
-    card.wrapperImage.style.backgroundImage = "url('./media/assets/background.jpg')";
-    card.wrapperImage.style.backgroundSize = "cover"
+    card.wrapperImage.style.justifyContent = "center";     
 
-    card.wrapperContent.style.top = "195px";
+    card.wrapperContent.style.height = "25%";
     card.wrapperContent.style.width = "100%";
 
     card.elementImage.style.maxWidth = "100%";
     card.elementImage.style.maxHeight = "100%";
 
-    card.elementIndex.style.marginTop = "0";
-    card.elementIndex.style.textAlign = "center";
-
-    card.elementName.style.marginTop = "0";
-    card.elementName.style.textAlign = "center";
-
-    card.elementType.style.marginTop = "0";
-    card.elementType.style.textAlign = "center";
-
-    card.containerBack.style.position = "absolute"; 
-    card.containerBack.style.zIndex = "0";
-    card.containerBack.style.backfaceVisibility = "hidden";
-    card.containerBack.style.transition = "transform 0.5s ease-in-out";
-    card.containerBack.style.transform = "rotateY(-180deg)"
-    card.containerBack.style.top = "0";
-    card.containerBack.style.width = "100%";
-    card.containerBack.style.height = "100%";
-
 }
 
 
 function createSections () {
+    const sectionLogo = document.createElement("section");
     const sectionCards = document.createElement("section");
-    return document.body.appendChild(sectionCards);
+    document.body.appendChild(sectionLogo);
+    document.body.appendChild(sectionCards);
+    return {
+        "sectionLogo": sectionLogo,
+        "sectionCards": sectionCards,
+    }
 }
 
 function styleSections (sectionCards) {
@@ -132,7 +161,6 @@ function shadowMouseOver () {
     this.style.filter = "brightness(0.7)";
     this.style.transform = "scale(1.05)";
     this.style.transition = "transform 0.15s ease-in-out"
-    console.log(this)
 };
 
 function shadowMouseOut () {
@@ -143,17 +171,23 @@ function shadowMouseOut () {
 function rotateCard () {
     const containerFront = this.querySelector(".containerFront");
     const containerBack = this.querySelector(".containerBack");
-    if (containerFront.style.transform == "rotateY(180deg)") {
-        containerFront.style.zIndex = "1";
-        containerFront.style.transform = "rotateY(0deg)";
-        containerBack.style.zIndex = "0";
-        containerBack.style.transform = "rotateY(180deg)";
+    if (containerFront.style.transform == ROTATED_TRUE) {
+        containerFront.style.zIndex = 1;
+        containerFront.style.transform = ROTATED_FALSE;
+        containerBack.style.zIndex = 0;
+        containerBack.style.transform = ROTATED_TRUE;
     } else {
-        containerFront.style.zIndex = "-1";
-        containerFront.style.transform = "rotateY(180deg)";
-        containerBack.style.zIndex = "2";
-        containerBack.style.transform = "rotateY(0deg)";
+        containerFront.style.zIndex = -1;
+        containerFront.style.transform = ROTATED_TRUE;
+        containerBack.style.zIndex = 2;
+        containerBack.style.transform = ROTATED_FALSE;
     }
+}
+
+function addCardEvents (card) {
+    card.containerCard.addEventListener("mouseover", shadowMouseOver);
+    card.containerCard.addEventListener("mouseout", shadowMouseOut);
+    card.containerCard.addEventListener("click", rotateCard);
 }
 
 main();
