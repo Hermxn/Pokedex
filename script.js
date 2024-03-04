@@ -30,10 +30,10 @@ function addFont () {
 
 function createCard (sectionCards) {
     const containerCard = document.createElement("div");
-    const containerFront = document.createElement("div");
-    const containerBack = document.createElement("div");
+    const containerFrontCover = document.createElement("div");
+    const containerBackCover = document.createElement("div");
     const wrapperImage = document.createElement("div");
-    const wrapperImageType = document.createElement("div");
+    const wrapperType = document.createElement("div");
     const elementImage = document.createElement("img");
     const elementIndex = document.createElement("p");
     const elementName = document.createElement("h3");
@@ -41,25 +41,25 @@ function createCard (sectionCards) {
     const elementType2 = document.createElement("img");
     const elementDescription = document.createElement("p");
     sectionCards.appendChild(containerCard);
-    containerCard.appendChild(containerFront);
-    containerCard.appendChild(containerBack);
-    containerFront.appendChild(elementIndex);
-    containerFront.appendChild(wrapperImage);
-    containerFront.appendChild(elementName);
-    containerFront.appendChild(wrapperImageType);
-    wrapperImageType.appendChild(elementType1);
-    wrapperImageType.appendChild(elementType2);
-    containerBack.appendChild(elementDescription);
+    containerCard.appendChild(containerFrontCover);
+    containerCard.appendChild(containerBackCover);
+    containerFrontCover.appendChild(elementIndex);
+    containerFrontCover.appendChild(wrapperImage);
+    containerFrontCover.appendChild(elementName);
+    containerFrontCover.appendChild(wrapperType);
+    wrapperType.appendChild(elementType1);
+    wrapperType.appendChild(elementType2);
+    containerBackCover.appendChild(elementDescription);
     wrapperImage.appendChild(elementImage);
     containerCard.className = "containerCard";
-    containerFront.className = "containerFront";
-    containerBack.className = "containerBack";
+    containerFrontCover.className = "containerFrontCover";
+    containerBackCover.className = "containerBackCover";
     return {
         "containerCard": containerCard,
-        "containerFront": containerFront, 
-        "containerBack": containerBack,
+        "containerFrontCover": containerFrontCover, 
+        "containerBackCover": containerBackCover,
         "wrapperImage": wrapperImage,
-        "wrapperImageType": wrapperImageType,
+        "wrapperType": wrapperType,
         "elementDescription": elementDescription,
         "elementImage": elementImage,
         "elementIndex": elementIndex,
@@ -86,22 +86,70 @@ function fillCard (card, pokemon) {
 }
 
 function styleCard(card, pokemon) {
+    const textElements = [card.elementIndex, card.elementName, card.elementDescription];
+    const containersCover = [card.containerFrontCover, card.containerBackCover];
+    const typeElements = [card.elementType1, card.elementType2];
 
-    card.containerFront.style.backgroundImage = `url("./assets/static/card_cover_front/${pokemon.type[0]}.jpg")`;
-    card.containerBack.style.backgroundImage = `url("./assets/static/card_cover_back/${pokemon.type[0]}.jpg")`;
-
-    const descriptionElements = [card.elementIndex, card.elementName, card.elementDescription];
-    const containers = [card.containerFront, card.containerBack];
-
-    descriptionElements.forEach(element => {
+    textElements.forEach(element => {
         element.style.marginTop = "10px";
         element.style.textAlign = "center";
         element.style.fontFamily = "Nintendo";
         element.style.fontStyle = "normal";
         element.style.fontWeight= "200";
         element.style.fontSize = "26px";
-        element.style.marginBottom = "10px"
+        element.style.marginBottom = "10px";
     });
+
+    containersCover.forEach(container => {
+        container.style.transition = ROTATE_SPEED;
+        container.style.backgroundSize = "100% 100%";
+        container.style.borderRadius = "10px";
+        container.style.backfaceVisibility = "hidden";
+        container.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.8)";
+    });
+
+    typeElements.forEach(element => {
+        element.style.maxWidth = "80%";
+        element.style.maxHeight = "80%";
+    });
+
+    document.body.style.backgroundImage = "url('./assets/static/background.jpg')";
+    document.body.style.backgroundSize = "25%";
+
+    card.containerCard.style.position = "relative";
+
+    card.containerFrontCover.style.backgroundImage = `url("./assets/static/card_cover_front/${pokemon.type[0]}.jpg")`;
+    card.containerBackCover.style.backgroundImage = `url("./assets/static/card_cover_back/${pokemon.type[0]}.jpg")`;
+
+    card.containerFrontCover.style.position = "relative";
+    card.containerFrontCover.style.width = "200px";
+    card.containerFrontCover.style.height = "300px";
+    card.containerFrontCover.style.display = "flex";
+    card.containerFrontCover.style.flexDirection = "column";
+    card.containerFrontCover.style.alignItems = "center";
+
+    card.containerBackCover.style.position = "absolute"; 
+    card.containerBackCover.style.transform = "rotateY(-180deg)";
+    card.containerBackCover.style.top = "0";
+    card.containerBackCover.style.width = "100%";
+    card.containerBackCover.style.height = "100%";
+
+    card.wrapperImage.style.height = "42%";
+    card.wrapperImage.style.width = "100%";
+    card.wrapperImage.style.display = "flex";
+    card.wrapperImage.style.alignItems = "center"; 
+    card.wrapperImage.style.justifyContent = "center";  
+
+    card.wrapperType.style.width = "100%";
+    card.wrapperType.style.margin = "0px 0px 0px 0px";
+    card.wrapperType.style.height = "14%";
+    card.wrapperType.style.display = "flex";
+    card.wrapperType.style.justifyContent = "center";  
+
+    card.wrapperType.style.margin = "10px 0px 10px 0px";
+
+    card.elementImage.style.maxWidth = "100%";
+    card.elementImage.style.maxHeight = "100%";
 
     card.elementIndex.style.marginBottom = "0px";
     card.elementIndex.style.width = "100%";
@@ -110,66 +158,10 @@ function styleCard(card, pokemon) {
     card.elementIndex.style.fontSize = "20px";
 
     card.elementName.style.marginTop = "15px";
-
-
-    containers.forEach(container => {
-        container.style.backgroundSize = "100% 100%";
-        container.style.borderRadius = "10px";
-    });
-
-    document.body.style.backgroundImage = "url('./assets/static/background.jpg')";
-    document.body.style.backgroundSize = "25%";
-
-    card.containerCard.style.position = "relative";
-
-    card.containerFront.style.zIndex = "1";
-    card.containerFront.style.backfaceVisibility = "hidden";
-    card.containerFront.style.transition = ROTATE_SPEED;
-    card.containerFront.style.position = "relative";
-    card.containerFront.style.width = "200px";
-    card.containerFront.style.height = "300px";
-    card.containerFront.style.display = "flex";
-    card.containerFront.style.flexDirection = "column";
-    card.containerFront.style.alignItems = "center";
-
-    card.containerBack.style.position = "absolute"; 
-    card.containerBack.style.zIndex = "0";
-    card.containerBack.style.backfaceVisibility = "hidden";
-    card.containerBack.style.transition = ROTATE_SPEED;
-    card.containerBack.style.transform = "rotateY(-180deg)"
-    card.containerBack.style.top = "0";
-    card.containerBack.style.width = "100%";
-    card.containerBack.style.height = "100%";
-
-    card.wrapperImage.style.height = "42%";
-    card.wrapperImage.style.width = "100%";
-    card.wrapperImage.style.display = "flex";
-    card.wrapperImage.style.alignItems = "center"; 
-    card.wrapperImage.style.justifyContent = "center";     
-
-
-    card.elementImage.style.maxWidth = "100%";
-    card.elementImage.style.maxHeight = "100%";
-
-    card.wrapperImageType.style.margin = "10px 0px 10px 0px";
+    card.elementName.style.width = "100%";
 
     card.elementDescription.style.margin = "12px 10px 10px 10px";
     card.elementDescription.style.fontSize = "22px";
-
-    card.elementName.style.width = "100%";
-    card.wrapperImageType.style.width = "100%";
-    card.wrapperImageType.style.margin = "0px 0px 0px 0px";
-    card.wrapperImageType.style.height = "14%";
-    card.wrapperImageType.style.display = "flex";
-    card.wrapperImageType.style.justifyContent = "center";
-
-    card.elementType1.style.maxWidth = "80%";
-    card.elementType1.style.maxHeight = "80%";
-    card.elementType2.style.maxWidth = "80%";
-    card.elementType2.style.maxHeight = "80%";
-
-    card.containerFront.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.8)";
-    card.containerBack.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.8)";
 }
 
 
@@ -202,26 +194,23 @@ function shadowMouseOut () {
     this.style.transform = "scale(1)";
 };
 
-function rotateCard () {
-    const containerFront = this.querySelector(".containerFront");
-    const containerBack = this.querySelector(".containerBack");
-    if (containerFront.style.transform == ROTATED_TRUE) {
-        containerFront.style.zIndex = 1;
-        containerFront.style.transform = ROTATED_FALSE;
-        containerBack.style.zIndex = 0;
-        containerBack.style.transform = ROTATED_TRUE;
+function rotateCard (card) {
+    card.containerCard.style.transform = "translateY(-5%) rotate(7deg)";
+    if (card.containerFrontCover.style.transform == ROTATED_TRUE) {
+        card.containerFrontCover.style.transform = ROTATED_FALSE;
+        card.containerBackCover.style.transform = ROTATED_TRUE;
     } else {
-        containerFront.style.zIndex = -1;
-        containerFront.style.transform = ROTATED_TRUE;
-        containerBack.style.zIndex = 2;
-        containerBack.style.transform = ROTATED_FALSE;
+        card.containerFrontCover.style.transform = ROTATED_TRUE;
+        card.containerBackCover.style.transform = ROTATED_FALSE;
     }
 }
 
 function addCardEvents (card) {
     card.containerCard.addEventListener("mouseover", shadowMouseOver);
     card.containerCard.addEventListener("mouseout", shadowMouseOut);
-    card.containerCard.addEventListener("click", rotateCard);
+    card.containerCard.addEventListener("click", function() {
+        rotateCard(card);
+    });
 }
 
 main();
