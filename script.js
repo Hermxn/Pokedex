@@ -3,10 +3,11 @@ import { POKEMONARRAY } from "./pokemonData.js";
 const ROTATED_TRUE = "rotateY(180deg)";
 const ROTATED_FALSE = "rotateY(0deg)";
 const ROTATE_SPEED = "transform 0.5s ease-in-out";
+let previousCard = null;
 
 function main () {
-    addFont();
     const sectionCards = createSections().sectionCards;
+    addFont();
     styleSections(sectionCards);
     for (const pokemon of POKEMONARRAY) {
         const card = createCard(sectionCards);
@@ -183,15 +184,15 @@ function styleSections (sectionCards) {
     sectionCards.style.gap = "1.5vw";
 }
 
-function shadowMouseOver () {
-    this.style.filter = "brightness(0.7)";
-    this.style.transform = "scale(1.05)";
-    this.style.transition = "transform 0.15s ease-in-out"
+function shadowMouseOver (card) {
+    card.containerCard.style.filter = "brightness(0.7)";
+    card.containerCard.style.transform = "scale(1.05)";
+    card.containerCard.style.transition = "transform 0.15s ease-in-out"
 };
 
-function shadowMouseOut () {
-    this.style.filter = "brightness(1)";
-    this.style.transform = "scale(1)";
+function shadowMouseOut (card) {
+    card.containerCard.style.filter = "brightness(1)";
+    card.containerCard.style.transform = "scale(1)";
 };
 
 function rotateCard (card) {
@@ -202,14 +203,27 @@ function rotateCard (card) {
     } else {
         card.containerFrontCover.style.transform = ROTATED_TRUE;
         card.containerBackCover.style.transform = ROTATED_FALSE;
-    }
+    };
 }
 
 function addCardEvents (card) {
-    card.containerCard.addEventListener("mouseover", shadowMouseOver);
-    card.containerCard.addEventListener("mouseout", shadowMouseOut);
+    card.containerCard.addEventListener("mouseover", function() {
+        shadowMouseOver(card);
+    });
+    card.containerCard.addEventListener("mouseout", function() {
+        shadowMouseOut(card);
+    });
     card.containerCard.addEventListener("click", function() {
-        rotateCard(card);
+        if (previousCard && previousCard != card && previousCard.containerFrontCover.style.transform == ROTATED_TRUE) {
+            rotateCard(previousCard);
+            previousCard.containerCard.style.transform = "translateY(0%) rotate(0deg)";
+            rotateCard(card);
+        } else if (previousCard == card) {
+            rotateCard(card);
+        } else {
+            rotateCard(card);
+        }
+        previousCard = card;
     });
 }
 
