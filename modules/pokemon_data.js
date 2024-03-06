@@ -1,3 +1,5 @@
+export { POKEMONARRAY };
+
 const POKEMONARRAY = [
    {
      thumbnail: 'bulbasaur.gif',
@@ -1057,5 +1059,4 @@ const POKEMONARRAY = [
     description: "Mew is said to possess the genetic composition of all Pokémon. It is capable of making itself invisible at will, so it entirely avoids notice even if it approaches people.",
   },
  ];
-
- export { POKEMONARRAY };
+ 
