@@ -7,7 +7,7 @@ const SECTION_LOGO_MARGIN = "0 0 25px 0";
 const SECTION_LOGO_HEIGHT = "25vh";
 
 const UNOWN = {
-    thumbnail: 'unown.gif',
+    thumbnail: ['unown.gif', 'unowns.gif'],
     id:'404 NOT FOUND',
     name: 'unown',
     type: ['psychic'],

@@ -86,7 +86,7 @@ function createCard (sections) {
 };
 
 function fillCard (card, pokemon) {
-    card.elementImage.src = `assets/static/pokemon_image/${pokemon.thumbnail}`;
+    card.elementImage.src = `assets/static/pokemon_image/${pokemon.thumbnail[0]}`;
     card.elementIndex.innerHTML = `#${pokemon.id}`;
     card.elementName.innerHTML = pokemon.name.toUpperCase();
     switch (pokemon.type.length) {
