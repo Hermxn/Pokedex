@@ -30,6 +30,7 @@ function createSections () {
     backgroundDexImage.src = BACKGROUND_IMAGE_DEX;
     backgroundBallImage.src = BACKGROUND_IMAGE_BALL;
     searchInput.type = "text";
+    searchInput.placeholder = "search your pokemon";
     return {
         "sectionLogo": sectionLogo,
         "sectionSearch": sectionSearch,

@@ -136,4 +136,9 @@ function styleSections (sections) {
     sections.sectionSearch.style.justifyContent = "center";
 
     sections.searchInput.style.zIndex = 1;
+    sections.searchInput.style.borderRadius = "7px";
+    sections.searchInput.style.fontFamily = "Nintendo";
+    sections.searchInput.style.fontWeight= "200";
+    sections.searchInput.style.fontSize = "26px";
+    sections.searchInput.style.textAlign = "center";
 };
