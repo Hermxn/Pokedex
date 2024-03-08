@@ -1,9 +1,12 @@
-export { addCardEvents, addSearchEvents };
+export { addCardEvents, addSearchEvents, addLogoEvents };
 
 import { ROTATED_TRUE, ROTATED_FALSE } from "./constants.js";
 import { search } from "./search.js";
+import { createCard, fillCard, styleCard } from "../script.js";
+import { POKEMONARRAY } from "./pokemon_data.js";
 
 let previousCard = null;
+let shiny = null;
 
 function addCardEvents (card) {
     card.containerCard.addEventListener("mouseover", function() {
@@ -32,6 +35,17 @@ function addSearchEvents (sections) {
     })
 };
 
+function addLogoEvents (sections) {
+    sections.backgroundDexImage.addEventListener("click", function() {
+        if (shiny == null || shiny == false) {
+            shiny = true;
+        } else if (shiny = true) {
+            shiny = false;
+        };
+        shinyCards(sections, shiny);
+    });
+};
+
 function shadowMouseOver (card) {
     card.containerCard.style.filter = "brightness(0.7)";
     card.containerCard.style.transform = "scale(1.05)";
@@ -53,3 +67,14 @@ function rotateCard (card) {
         card.containerBackCover.style.transform = ROTATED_FALSE;
     };
 };
+
+function shinyCards (sections, shiny) {
+    sections.sectionCards.innerHTML = '';
+    for (const pokemon of POKEMONARRAY) {
+        const card = createCard(sections);
+        fillCard(card, pokemon, shiny);
+        styleCard(card, pokemon);
+        addCardEvents(card);
+        };
+    console.log(shiny);
+}

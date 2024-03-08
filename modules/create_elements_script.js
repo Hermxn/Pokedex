@@ -85,8 +85,7 @@ function createCard (sections) {
     };
 };
 
-function fillCard (card, pokemon) {
-    card.elementImage.src = `assets/static/pokemon_image/${pokemon.thumbnail[0]}`;
+function fillCard (card, pokemon, shiny) {
     card.elementIndex.innerHTML = `#${pokemon.id}`;
     card.elementName.innerHTML = pokemon.name.toUpperCase();
     switch (pokemon.type.length) {
@@ -99,4 +98,12 @@ function fillCard (card, pokemon) {
             break;
     };
     card.elementDescription.innerHTML = pokemon.description;
+    console.log(shiny);
+    if (shiny == true){
+        card.elementImage.src = `assets/static/pokemon_image/${pokemon.thumbnail[1]}`;
+        return shiny = false;
+    } else {
+        card.elementImage.src = `assets/static/pokemon_image/${pokemon.thumbnail[0]}`
+        return shiny = true;
+    };
 };
