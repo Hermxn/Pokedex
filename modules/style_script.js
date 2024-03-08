@@ -141,4 +141,6 @@ function styleSections (sections) {
     sections.searchInput.style.fontWeight= "200";
     sections.searchInput.style.fontSize = "26px";
     sections.searchInput.style.textAlign = "center";
+
+    sections.backgroundDexImage.style.scale = "1.35";
 };

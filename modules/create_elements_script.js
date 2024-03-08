@@ -98,7 +98,6 @@ function fillCard (card, pokemon, shiny) {
             break;
     };
     card.elementDescription.innerHTML = pokemon.description;
-    console.log(shiny);
     if (shiny == true){
         card.elementImage.src = `assets/static/pokemon_image/${pokemon.thumbnail[1]}`;
         return shiny = false;

@@ -31,7 +31,7 @@ function addCardEvents (card) {
 
 function addSearchEvents (sections) {
     sections.searchInput.addEventListener("input", function () {
-       search(sections);
+       search(sections, shiny);
     })
 };
 
@@ -68,13 +68,16 @@ function rotateCard (card) {
     };
 };
 
-function shinyCards (sections, shiny) {
+function shinyCards(sections, shiny) {
+    sections.backgroundDexImage.src = "./assets/static/background/dex_animated.GIF";
     sections.sectionCards.innerHTML = '';
     for (const pokemon of POKEMONARRAY) {
         const card = createCard(sections);
         fillCard(card, pokemon, shiny);
         styleCard(card, pokemon);
         addCardEvents(card);
-        };
-    console.log(shiny);
+    }
+    setTimeout(function() {
+        sections.backgroundDexImage.src = "./assets/static/background/dex.png";
+    }, 4000);
 }
