@@ -113,15 +113,21 @@ function styleSections (sections) {
     sections.logoWrapper.style.height = "100%";
     sections.logoWrapper.style.width = "100%";
     sections.logoWrapper.style.display = "flex";
+    sections.logoWrapper.style.justifyContent = "space-around";
 
-    sections.logoBackgroundImage.style.position = "absolute";
-    sections.logoBackgroundImage.style.width = "100%";
-    sections.logoBackgroundImage.style.top = "0";
-    sections.logoBackgroundImage.style.objectFit = "cover";
+    sections.backgroundLinesImage.style.position = "absolute";
+    sections.backgroundLinesImage.style.width = "100%";
+    sections.backgroundLinesImage.style.top = "0";
+    sections.backgroundLinesImage.style.objectFit = "cover";
     
-    sections.logoImage2.style.position = "absolute";
-    sections.logoImage2.style.height = "100%";
-    sections.logoImage2.style.width = "100%";
-    sections.logoImage2.style.objectFit = "contain";
-    sections.logoImage2.style.zIndex = 1;
+    sections.backgroundLogoImage.style.height = "100%";
+    sections.backgroundLogoImage.style.objectFit = "contain";
+    sections.backgroundLogoImage.style.zIndex = 1;
+    sections.backgroundLogoImage.style.marginTop = "5px";
+
+    sections.backgroundDexImage.style.zIndex = 1;
+    sections.backgroundDexImage.style.marginTop = "5px";
+    
+    sections.backgroundBallImage.style.zIndex = 1;
+    sections.backgroundBallImage.style.marginTop = "5px";
 };

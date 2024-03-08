@@ -2,27 +2,37 @@ export { createSections, createCard, fillCard };
 
 const BACKGROUND_IMAGE_LINES = "./assets/static/background/background_lines.png";
 const BACKGROUND_IMAGE_LOGO = "./assets/static/background/pokemon_logo.png";
+const BACKGROUND_IMAGE_DEX = "./assets/static/background/dex.png";
+const BACKGROUND_IMAGE_BALL = "./assets/static/background/ball.png";
 const LOGO_IMAGE = "./assets/static/logo_types/";
 
 function createSections () {
     const sectionLogo = document.createElement("section");
     const sectionCards = document.createElement("section");
     const logoWrapper = document.createElement("div");
-    const logoBackgroundImage = document.createElement("img");
-    const logoImage2 = document.createElement("img");
+    const backgroundLinesImage = document.createElement("img");
+    const backgroundLogoImage = document.createElement("img");
+    const backgroundBallImage = document.createElement("img");
+    const backgroundDexImage = document.createElement("img");
     document.body.appendChild(sectionLogo);
     document.body.appendChild(sectionCards);
     sectionLogo.appendChild(logoWrapper);
-    logoWrapper.appendChild(logoBackgroundImage);
-    logoWrapper.appendChild(logoImage2);
-    logoBackgroundImage.src = BACKGROUND_IMAGE_LINES;
-    logoImage2.src = BACKGROUND_IMAGE_LOGO;
+    logoWrapper.appendChild(backgroundLinesImage);
+    logoWrapper.appendChild(backgroundBallImage);
+    logoWrapper.appendChild(backgroundLogoImage);
+    logoWrapper.appendChild(backgroundDexImage);
+    backgroundLinesImage.src = BACKGROUND_IMAGE_LINES;
+    backgroundLogoImage.src = BACKGROUND_IMAGE_LOGO;
+    backgroundDexImage.src = BACKGROUND_IMAGE_DEX;
+    backgroundBallImage.src = BACKGROUND_IMAGE_BALL;
     return {
         "sectionLogo": sectionLogo,
         "sectionCards": sectionCards,
         "logoWrapper": logoWrapper,
-        "logoBackgroundImage": logoBackgroundImage,
-        "logoImage2": logoImage2,
+        "backgroundLinesImage": backgroundLinesImage,
+        "backgroundLogoImage": backgroundLogoImage,
+        "backgroundDexImage": backgroundDexImage,
+        "backgroundBallImage": backgroundBallImage,
     };
 };
 
