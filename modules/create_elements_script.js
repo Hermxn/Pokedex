@@ -1,5 +1,9 @@
 export { createSections, createCard, fillCard };
 
+const BACKGROUND_IMAGE_LINES = "./assets/static/background/background_lines.png";
+const BACKGROUND_IMAGE_LOGO = "./assets/static/background/pokemon_logo.png";
+const LOGO_IMAGE = "./assets/static/logo_types/";
+
 function createSections () {
     const sectionLogo = document.createElement("section");
     const sectionCards = document.createElement("section");
@@ -11,8 +15,8 @@ function createSections () {
     sectionLogo.appendChild(logoWrapper);
     logoWrapper.appendChild(logoBackgroundImage);
     logoWrapper.appendChild(logoImage2);
-    logoBackgroundImage.src = "./assets/static/background_lines.png"
-    logoImage2.src = "./assets/static/pokemon_logo.png"
+    logoBackgroundImage.src = BACKGROUND_IMAGE_LINES;
+    logoImage2.src = BACKGROUND_IMAGE_LOGO;
     return {
         "sectionLogo": sectionLogo,
         "sectionCards": sectionCards,
@@ -69,11 +73,11 @@ function fillCard (card, pokemon) {
     card.elementName.innerHTML = pokemon.name.toUpperCase();
     switch (pokemon.type.length) {
         case 1:
-            card.elementType1.src = `./assets/static/logo_types/${pokemon.type[0]}.png`;
+            card.elementType1.src = LOGO_IMAGE + pokemon.type[0] + ".png";
             break;
         case 2:
-            card.elementType1.src = `./assets/static/logo_types/${pokemon.type[0]}.png`;
-            card.elementType2.src = `./assets/static/logo_types/${pokemon.type[1]}.png`;
+            card.elementType1.src = LOGO_IMAGE + pokemon.type[0] + ".png";
+            card.elementType2.src = LOGO_IMAGE + pokemon.type[1] + ".png";
             break;
     };
     card.elementDescription.innerHTML = pokemon.description;

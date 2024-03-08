@@ -2,6 +2,10 @@ export { addFont, styleCard, styleSections };
 
 import { ROTATE_SPEED, SECTION_LOGO_MARGIN, SECTION_LOGO_HEIGHT } from "./constants.js";
 
+const BACKGROUND_IMAGE = "url('./assets/static/background/background.jpg')";
+const FRONT_COVER_IMAGE_URL = "url(./assets/static/card_cover_front/";
+const BACK_COVER_IMAGE_URL = "url(./assets/static/card_cover_back/";
+
 document.body.style.margin = 0;
 
 function addFont () {
@@ -44,13 +48,13 @@ function styleCard(card, pokemon) {
         element.style.maxHeight = "80%";
     });
 
-    document.body.style.backgroundImage = "url('./assets/static/background.jpg')";
+    document.body.style.backgroundImage = BACKGROUND_IMAGE;
     document.body.style.backgroundSize = "25%";
 
     card.containerCard.style.position = "relative";
 
-    card.containerFrontCover.style.backgroundImage = `url("./assets/static/card_cover_front/${pokemon.type[0]}.jpg")`;
-    card.containerBackCover.style.backgroundImage = `url("./assets/static/card_cover_back/${pokemon.type[0]}.jpg")`;
+    card.containerFrontCover.style.backgroundImage = FRONT_COVER_IMAGE_URL + pokemon.type[0] + ".jpg)";
+    card.containerBackCover.style.backgroundImage = BACK_COVER_IMAGE_URL + pokemon.type[0] + ".jpg)";
 
     card.containerFrontCover.style.position = "relative";
     card.containerFrontCover.style.width = "200px";
