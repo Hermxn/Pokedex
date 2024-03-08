@@ -1,4 +1,4 @@
-export { createCard, fillCard, styleCard };
+export { createCard, fillCard, styleCard, addCardEvents };
 
 import { POKEMONARRAY } from "./modules/pokemon_data.js";
 import { addFont, styleCard, styleSections } from "./modules/style_script.js";
@@ -9,7 +9,7 @@ function main () {
     const sections = createSections();
     addFont();
     styleSections(sections);
-    addSearchEvents(sections.searchButton, sections.searchInput, sections);
+    addSearchEvents(sections);
     for (const pokemon of POKEMONARRAY) {
         const card = createCard(sections);
         fillCard(card, pokemon);

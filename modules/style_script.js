@@ -136,6 +136,4 @@ function styleSections (sections) {
     sections.sectionSearch.style.justifyContent = "center";
 
     sections.searchInput.style.zIndex = 1;
-    
-    sections.searchButton.style.zIndex = 1;
 };

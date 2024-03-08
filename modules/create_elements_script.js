@@ -16,13 +16,11 @@ function createSections () {
     const backgroundBallImage = document.createElement("img");
     const backgroundDexImage = document.createElement("img");
     const searchInput = document.createElement("input");
-    const searchButton = document.createElement("button");
     document.body.appendChild(sectionLogo);
     document.body.appendChild(sectionSearch);
     document.body.appendChild(sectionCards);
     sectionLogo.appendChild(logoWrapper);
     sectionSearch.appendChild(searchInput);
-    sectionSearch.appendChild(searchButton);
     logoWrapper.appendChild(backgroundLinesImage);
     logoWrapper.appendChild(backgroundBallImage);
     logoWrapper.appendChild(backgroundLogoImage);
@@ -32,7 +30,6 @@ function createSections () {
     backgroundDexImage.src = BACKGROUND_IMAGE_DEX;
     backgroundBallImage.src = BACKGROUND_IMAGE_BALL;
     searchInput.type = "text";
-    searchButton.textContent = "Search";
     return {
         "sectionLogo": sectionLogo,
         "sectionSearch": sectionSearch,
@@ -43,7 +40,6 @@ function createSections () {
         "backgroundDexImage": backgroundDexImage,
         "backgroundBallImage": backgroundBallImage,
         "searchInput": searchInput,
-        "searchButton": searchButton,
     };
 };
 
