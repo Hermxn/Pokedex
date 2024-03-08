@@ -1,6 +1,8 @@
-export { addCardEvents };
+export { addCardEvents, addSearchEvents };
 
 import { ROTATED_TRUE, ROTATED_FALSE } from "./constants.js";
+import { POKEMONARRAY } from "./pokemon_data.js";
+import { createCard, fillCard, styleCard } from "../script.js";
 
 let previousCard = null;
 
@@ -23,7 +25,13 @@ function addCardEvents (card) {
         }
         previousCard = card;
     });
-}
+};
+
+function addSearchEvents (searchButton, searchInput, sections) {
+    searchButton.addEventListener("click", function () {
+       search(sections, searchInput);
+    })
+};
 
 function shadowMouseOver (card) {
     card.containerCard.style.filter = "brightness(0.7)";
@@ -45,4 +53,18 @@ function rotateCard (card) {
         card.containerFrontCover.style.transform = ROTATED_TRUE;
         card.containerBackCover.style.transform = ROTATED_FALSE;
     };
+};
+
+function search (sections, searchInput) {
+    const selected = searchInput.value.toLowerCase();
+    const filteredArray = POKEMONARRAY.filter(pokemon => {
+        return pokemon.name.startsWith(selected);
+    });
+    sections.sectionCards.innerHTML = '';
+    for (const pokemon of filteredArray) {
+        const card = createCard(sections);
+        fillCard(card, pokemon);
+        styleCard(card, pokemon);
+        addCardEvents(card);
+    }
 };
