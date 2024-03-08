@@ -8,15 +8,21 @@ const LOGO_IMAGE = "./assets/static/logo_types/";
 
 function createSections () {
     const sectionLogo = document.createElement("section");
+    const sectionSearch = document.createElement("section");
     const sectionCards = document.createElement("section");
     const logoWrapper = document.createElement("div");
     const backgroundLinesImage = document.createElement("img");
     const backgroundLogoImage = document.createElement("img");
     const backgroundBallImage = document.createElement("img");
     const backgroundDexImage = document.createElement("img");
+    const searchInput = document.createElement("input");
+    const searchButton = document.createElement("button");
     document.body.appendChild(sectionLogo);
+    document.body.appendChild(sectionSearch);
     document.body.appendChild(sectionCards);
     sectionLogo.appendChild(logoWrapper);
+    sectionSearch.appendChild(searchInput);
+    sectionSearch.appendChild(searchButton);
     logoWrapper.appendChild(backgroundLinesImage);
     logoWrapper.appendChild(backgroundBallImage);
     logoWrapper.appendChild(backgroundLogoImage);
@@ -25,14 +31,19 @@ function createSections () {
     backgroundLogoImage.src = BACKGROUND_IMAGE_LOGO;
     backgroundDexImage.src = BACKGROUND_IMAGE_DEX;
     backgroundBallImage.src = BACKGROUND_IMAGE_BALL;
+    searchInput.type = "text";
+    searchButton.textContent = "Search";
     return {
         "sectionLogo": sectionLogo,
+        "sectionSearch": sectionSearch,
         "sectionCards": sectionCards,
         "logoWrapper": logoWrapper,
         "backgroundLinesImage": backgroundLinesImage,
         "backgroundLogoImage": backgroundLogoImage,
         "backgroundDexImage": backgroundDexImage,
         "backgroundBallImage": backgroundBallImage,
+        "searchInput": searchInput,
+        "searchButton": searchButton,
     };
 };
 

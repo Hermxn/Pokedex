@@ -130,4 +130,12 @@ function styleSections (sections) {
     
     sections.backgroundBallImage.style.zIndex = 1;
     sections.backgroundBallImage.style.marginTop = "5px";
+
+    sections.sectionSearch.style.margin = "30px 0 30px 0";
+    sections.sectionSearch.style.display = "flex";
+    sections.sectionSearch.style.justifyContent = "center";
+
+    sections.searchInput.style.zIndex = 1;
+    
+    sections.searchButton.style.zIndex = 1;
 };
